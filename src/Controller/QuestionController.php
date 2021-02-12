@@ -2,28 +2,30 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Twig\Environment;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class QuestionController extends AbstractController
 {
-    public function __construct(
-        private Environment $twig
-    ) {}
 
     #[Route('/', name: 'questions.homepage')]
     public function homepage(): Response
     {
-        return new Response($this->twig->render('landing/index.html.twig'));
+        return $this->render('landing/index.html.twig');
+    }
+
+    #[Route('/questions', name: 'questions.index')]
+    public function index(): Response
+    {
+        return $this->render('questions/index.html.twig');
     }
 
     #[Route('/questions/{slug}', name: 'questions.show')]
     public function show($slug)
     {
-        return new Response($this->twig->render('questions/show.html.twig', [
+        return $this->render('questions/show.html.twig', [
             'question' => $slug 
-        ]));
+        ]);
     }
 }

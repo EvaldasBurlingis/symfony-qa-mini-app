@@ -1,5 +1,12 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    hello
+    <ul>
+        <li>
+            <a href="{{ path('questions.show', { slug: 'my-first-question ' }) }}">First question</a>
+        </li>
+        <li>
+            <a href="{{ path('questions.show', { slug: 'my-second-question ' }) }}">Second question</a>
+        </li>
+    </ul>
 {% endblock %}
