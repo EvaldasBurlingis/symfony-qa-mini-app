@@ -2,11 +2,12 @@
 
 {% block body %}
     <ul>
-        <li>
-            <a href="{{ path('questions.show', { slug: 'my-first-question ' }) }}">First question</a>
-        </li>
-        <li>
-            <a href="{{ path('questions.show', { slug: 'my-second-question ' }) }}">Second question</a>
-        </li>
+        {% if questions|length > 0 %}
+            {% for question in questions %}
+                <li>
+                    <a href="{{ path('questions.show', { slug: question.slug }) }}">{{ question.title }}</a>
+                </li>
+            {% endfor %}
+        {% endif %}
     </ul>
 {% endblock %}

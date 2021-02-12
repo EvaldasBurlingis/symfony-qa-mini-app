@@ -1,7 +1,8 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {{ question }}
+    <h1>{{ question.title }}</h1>
+    <p>{{ question.content }}</p>
 
     <div>
         <span class="js-vote-arrows">
