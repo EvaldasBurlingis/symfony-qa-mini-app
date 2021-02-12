@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Answer;
 use App\Entity\Question;
+use App\Form\AnswerFormType;
 use App\Form\QuestionFormType;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -54,10 +56,29 @@ class QuestionController extends AbstractController
     }
 
     #[Route('/questions/{slug}', name: 'questions.show')]
-    public function show($slug)
+    public function show(Request $request, $slug)
     {
+        $question = $this->questionRepository->findOneBy(['slug' => $slug]);
+
+        $answer = new Answer();
+        $form = $this->createForm(AnswerFormType::class, $answer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $answer->setQuestion($question);
+            $answer->setVote(0);
+            $anwer->setConent($form['answer'])
+            $this->entityManager->persist($answer);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('questions.show', ['slug' => $slug]);
+        }
+
+
         return $this->render('questions/show.html.twig', [
-            'question' => $this->questionRepository->findOneBy(['slug' => $slug])
+            'question'    => $question,
+            'answer_form' => $form->createView()
         ]);
     }
 }

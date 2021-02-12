@@ -4,13 +4,29 @@
     <h1>{{ question.title }}</h1>
     <p>{{ question.content }}</p>
 
-    <div>
+    <hr>
+
+    {{ form(answer_form) }}
+
+    <hr>
+
+    <h2>Answers</h2>
+    {% if question.answers|length > 0 %}
+        {% for answer in question.answers %}
+            <div>
+                <p>{{ answer.content }}</p>
+            </div>
+        {% endfor %}
+
+    {% endif %}
+
+    {# <div>
         <span class="js-vote-arrows">
             <button data-direction="up">+</button>
             <button data-direction="down">-</button>
         </span>
         <span class="js-vote-total"></span>
-    </div>
+    </div> #}
 {% endblock %}
 
 {% block javascripts %}

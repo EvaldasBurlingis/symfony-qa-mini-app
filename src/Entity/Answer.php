@@ -20,26 +20,32 @@ class Answer
     /**
      * @ORM\Column(type="text")
      */
-    private $answer;
+    private $content;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $vote;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Question::class, inversedBy="answers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $question;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAnswer(): ?string
+    public function getContent(): ?string
     {
-        return $this->answer;
+        return $this->content;
     }
 
-    public function setAnswer(string $answer): self
+    public function setContent(string $content): self
     {
-        $this->answer = $answer;
+        $this->content = $content;
 
         return $this;
     }
@@ -52,6 +58,18 @@ class Answer
     public function setVote(?int $vote): self
     {
         $this->vote = $vote;
+
+        return $this;
+    }
+
+    public function getQuestion(): ?Question
+    {
+        return $this->question;
+    }
+
+    public function setQuestion(?Question $question): self
+    {
+        $this->question = $question;
 
         return $this;
     }
