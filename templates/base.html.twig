@@ -7,11 +7,16 @@
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
+            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
         {% endblock %}
     </head>
     <body>
-        {% include "partials/navigation.html.twig" %}
-        {% block body %}{% endblock %}
+        {% include "_partials/_navigation.html.twig" %}
+
+        <main class="mx-auto max-w-4xl pt-8 pb-16">
+            {% block body %}{% endblock %}
+        </main>
+
         {% block javascripts %}
             <script src="{{ asset('/js/app.js') }}"></script>
             {#{{ encore_entry_script_tags('app') }}#}

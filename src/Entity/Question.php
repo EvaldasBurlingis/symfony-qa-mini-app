@@ -132,4 +132,12 @@ class Question
 
         return $this;
     }
+
+    public function getExcerpt(): string
+    {
+        $excerpt = $this->content;
+        if (strlen($this->content) > 200) $excerpt = substr($this->content, 0, 200) . '...';
+
+        return $excerpt;
+    }
 }

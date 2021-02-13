@@ -68,7 +68,6 @@ class QuestionController extends AbstractController
         {
             $answer->setQuestion($question);
             $answer->setVote(0);
-            $anwer->setConent($form['answer'])
             $this->entityManager->persist($answer);
             $this->entityManager->flush();
 

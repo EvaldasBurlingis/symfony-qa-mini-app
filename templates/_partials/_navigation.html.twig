@@ -1,0 +1,26 @@
+{# <nav>
+    <ul>
+        <li>
+            <a href="{{ path('questions.homepage') }}">Homepage</a>
+            <a href="{{ path('questions.create') }}">Submit new question</a>
+        </li>
+    </ul>
+</nav> #}
+
+<header class="py-4">
+    <nav class="mx-auto max-w-4xl flex justify-between">
+        <ul class="flex items-center">
+            <li class="mr-8">
+                <a href="{{ path('questions.homepage') }}" class="text-sm text-gray-700 hover:text-gray-800">Homepage</a>
+            </li>
+            <li class="mr-8">
+                <a href="{{ path('questions.create') }}" class="text-sm text-gray-700 hover:text-gray-800">Submit new question</a>
+            </li>
+        </ul>
+
+        <div>
+            <a href="" class="px-3 py-1 mr-2 bg-blue-100 text-blue-600 text-sm border border-blue-400 rounded-sm">Log in</a>
+            <a href="" class="px-3 py-1 mr-2 bg-blue-600 text-blue-100 text-sm border border-blue-600 rounded-sm">Sign up</a>
+        </div>
+    </nav>
+</header>
