@@ -1,24 +1,31 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>{{ question.title }}</h1>
-    <p>{{ question.content }}</p>
+    <div class="pb-4">
+        <h1 class="text-3xl tracking-tight font-semibold mb-4">{{ question.title }}</h1>
+        <p class="text-gray-700">{{ question.content }}</p> 
+    </div>
 
     <hr>
-
-    {{ form(answer_form) }}
-
+    <div class="py-6">
+        {{ form(answer_form) }}
+    </div>
     <hr>
 
-    <h2>Answers</h2>
-    {% if question.answers|length > 0 %}
-        {% for answer in question.answers %}
-            <div>
-                <p>{{ answer.content }}</p>
-            </div>
-        {% endfor %}
+    <div class="py-6">
+        <h2 class="text-2xl font-bold tracking-tight mb-4">Answers</h2>
 
-    {% endif %}
+        <div>
+            {% if question.answers|length > 0 %}
+                {% for answer in question.answers|sort((a, b) => a.vote < b.vote) %}
+                    <div class="border border-gray-300 mb-4 p-4 rounded-sm flex items-center">
+                        <span class="mr-8 text-blue-200 px-4 font-bold text-4xl">{{ answer.vote }}</span>
+                        <p class="tracking-tight text-gray-700 text-base">{{ answer.content|raw }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 
     {# <div>
         <span class="js-vote-arrows">
@@ -31,5 +38,15 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('/js/question_show.js') }}"></script>
+    <script>
+ClassicEditor
+    .create( document.querySelector( '#answer_form_content' ), {
+        removePlugins: ['ImageUpload', 'Table', 'MediaEmbed']
+        }
+    )
+    .catch( error => {
+        console.log( error );
+    } );
+    </script>
+    // <script src="{{ asset('/js/question_show.js') }}"></script>
 {% endblock %}
