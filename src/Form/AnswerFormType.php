@@ -30,6 +30,9 @@ class AnswerFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Answer::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrd_token_id'   => 'answer_item'
         ]);
     }
 }

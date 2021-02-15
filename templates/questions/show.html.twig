@@ -38,15 +38,4 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script>
-ClassicEditor
-    .create( document.querySelector( '#answer_form_content' ), {
-        removePlugins: ['ImageUpload', 'Table', 'MediaEmbed']
-        }
-    )
-    .catch( error => {
-        console.log( error );
-    } );
-    </script>
-    // <script src="{{ asset('/js/question_show.js') }}"></script>
 {% endblock %}
