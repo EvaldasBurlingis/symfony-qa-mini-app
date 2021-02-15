@@ -28,7 +28,9 @@ class QuestionFormType extends AbstractType
                 'attr' => ['class' => 'border border-2 rounded-sm border-blue-200 p-2 w-full'],
                 'row_attr' => ['class' => 'mb-2']
             ])
-            ->add('Save', SubmitType::class);
+            ->add('Save', SubmitType::class, [
+                'attr' => ['class' => 'px-3 py-1 mr-2 bg-blue-600 text-blue-100 text-sm border border-blue-600 rounded-sm']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

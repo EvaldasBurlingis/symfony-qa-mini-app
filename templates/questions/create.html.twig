@@ -1,7 +1,13 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {{ form(question_form) }}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {{ form(question_form) }}
+    {% else %}
+         <div class="py-6">
+            <p class="text-blue-600 text-sm">Please <a href="/login" class="underline font-bold">log in</a> to ask a question</p>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}

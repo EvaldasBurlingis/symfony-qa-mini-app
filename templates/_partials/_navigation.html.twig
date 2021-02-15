@@ -19,8 +19,12 @@
         </ul>
 
         <div>
-            <a href="" class="px-3 py-1 mr-2 bg-blue-100 text-blue-600 text-sm border border-blue-400 rounded-sm">Log in</a>
-            <a href="" class="px-3 py-1 mr-2 bg-blue-600 text-blue-100 text-sm border border-blue-600 rounded-sm">Sign up</a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="/logout" class="px-3 py-1 mr-2 bg-blue-100 text-blue-600 text-sm border border-blue-400 rounded-sm">Logout</a>
+            {% else %}
+                <a href="/login" class="px-3 py-1 mr-2 bg-blue-100 text-blue-600 text-sm border border-blue-400 rounded-sm">Log in</a>
+                <a href="/register" class="px-3 py-1 mr-2 bg-blue-600 text-blue-100 text-sm border border-blue-600 rounded-sm">Sign up</a>
+            {% endif %}
         </div>
     </nav>
 </header>

@@ -236,6 +236,18 @@
     "symfony/intl": {
         "version": "v5.2.3"
     },
+    "symfony/lock": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "13350583a83fa636bf45a5fb62da3bdc73be52a1"
+        },
+        "files": [
+            "config/packages/lock.yaml"
+        ]
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -299,6 +311,9 @@
     "symfony/proxy-manager-bridge": {
         "version": "v5.2.3"
     },
+    "symfony/rate-limiter": {
+        "version": "v5.2.3"
+    },
     "symfony/routing": {
         "version": "5.1",
         "recipe": {
@@ -313,10 +328,28 @@
             "config/routes.yaml"
         ]
     },
+    "symfony/security-bundle": {
+        "version": "5.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.1",
+            "ref": "0a4bae19389d3b9cba1ca0102e3b2bccea724603"
+        },
+        "files": [
+            "config/packages/security.yaml"
+        ]
+    },
     "symfony/security-core": {
         "version": "v5.2.3"
     },
     "symfony/security-csrf": {
+        "version": "v5.2.3"
+    },
+    "symfony/security-guard": {
+        "version": "v5.2.3"
+    },
+    "symfony/security-http": {
         "version": "v5.2.3"
     },
     "symfony/service-contracts": {
