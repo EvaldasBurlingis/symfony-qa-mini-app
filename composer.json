@@ -12,6 +12,7 @@
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
+        "friendsofsymfony/ckeditor-bundle": "^2.3",
         "symfony/asset": "5.2.*",
         "symfony/console": "5.2.*",
         "symfony/debug-bundle": "5.2.*",

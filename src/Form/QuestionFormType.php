@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Question;
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,7 +22,7 @@ class QuestionFormType extends AbstractType
                 'attr' => ['class' => 'border border-2 rounded-sm border-blue-200 p-2 w-full'],
                 'row_attr' => ['class' => 'mb-2']
             ])
-            ->add('content', TextareaType::class, [
+            ->add('content', CKEditorType::class, [
                 'label' => 'Your Question',
                 'label_attr' => ['class' => 'block text-xs text-blue-700 mb-1'],
                 'attr' => ['class' => 'border border-2 rounded-sm border-blue-200 p-2 w-full'],
