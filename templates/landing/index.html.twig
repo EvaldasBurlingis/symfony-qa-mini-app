@@ -13,12 +13,12 @@
                         <span class=" font-bold text-blue-200 text-4xl">{{ question.answers|length }}</span>
                         <span class="text-xs text-blue-300">answers</span>
                     </span>
-
                     <div>
                         <a 
                             href="{{ path('questions.show', { slug: question.slug }) }}"
-                            class="text-blue-600 text-lg font-semibold tracking-tight block mb-2"    
+                            class="text-blue-600 text-lg font-semibold tracking-tight block"    
                         >{{ question.title }}</a>
+                        <span class="block text-xs mb-2 text-gray-300">by {{ question.owner.profile.username }}</span>
                         <p class="text-base text-gray-700 tracking-tight mb-2">{{ question.getExcerpt()|striptags }}</p>
                         <a 
                             href="{{ path('questions.show', { slug: question.slug }) }}"

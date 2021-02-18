@@ -1,10 +1,20 @@
-# Stackoverflow clone built with Symfony 5 framework
+#  Mini stackoverflow app
 
 Demo app, built with Symfony 5  and PHP 8.
 
+---
+
 ## Features
-* [ ] Only registered users can create question
-* [ ] Logged in user can see all questions he asked.
-* [ ] User can create questions
-* [ ] User can answer questions
-* [ ] User can vote question up/down
+* [x] Only registered users can create question
+* [x] User can create/delete questions
+* [x] User can answer questions
+* [x] User can vote question up/down
+
+---
+
+## Screenshots
+
+<div>
+    <img src="screenshots/1.png" />
+    <img src="screenshots/2.png" />
+</div>

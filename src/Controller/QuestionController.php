@@ -35,27 +35,18 @@ class QuestionController extends AbstractController
         return $this->render('questions/index.html.twig');
     }
 
-    #[Route('/questions/create', name: 'questions.create')]
-    public function create(Request $request): Response
+    #[Route('/questions/create', name: 'questions.create', methods: ['GET'])]
+    public function create(): Response
     {
         $question = new Question();
         $form = $this->createForm(QuestionFormType::class, $question);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $this->entityManager->persist($question);
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('questions.homepage');
-        }
-        
         return $this->render('questions/create.html.twig', [
             'question_form' => $form->createView()
         ]);
     }
 
-    #[Route('/questions/{slug}', name: 'questions.show')]
+    #[Route('/questions/{slug}', name: 'questions.show', methods: ['GET'])]
     public function show(Request $request, $slug)
     {
         $question = $this->questionRepository->findOneBy(['slug' => $slug]);
@@ -79,5 +70,39 @@ class QuestionController extends AbstractController
             'question'    => $question,
             'answer_form' => $form->createView()
         ]);
+    }
+
+    #[Route('/questions/create', name: 'questions.store', methods: ['POST'])]
+    public function store(Request $request): Response
+    {
+        $question = new Question();
+        $form = $this->createForm(QuestionFormType::class, $question);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $question->setOwner($this->getUser());
+            $this->entityManager->persist($question);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('questions.homepage');
+        }
+    }
+
+    #[Route('/questions/{id}', name: 'questions.destroy', methods: ['DELETE'])]
+    public function destroy(Request $request, $id)
+    {
+        $question = $this->questionRepository->find($id);
+
+        if ($this->isCsrfTokenValid('delete-question' . $question->getId(), $request->request->get('_token')  )) {
+            if($question->getOwner() !== $this->getUser()) {
+                throw $this->createAccessDeniedException();
+            }
+    
+            $this->entityManager->remove($question);
+            $this->entityManager->flush();
+    
+            return $this->redirectToRoute('questions.homepage');
+        }
     }
 }

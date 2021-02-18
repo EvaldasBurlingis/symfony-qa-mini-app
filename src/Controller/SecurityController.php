@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\UserProfile;
 use App\Form\RegistrationFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,7 @@ class SecurityController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
+        $userProfile = new UserProfile();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -39,10 +41,15 @@ class SecurityController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $userProfile->setOwner($user);
+            $userProfile->setUsername($form->get('username')->getData());
+            $entityManager->persist($userProfile);
+            $entityManager->flush();      
 
             return $this->redirectToRoute('questions.homepage');
         }

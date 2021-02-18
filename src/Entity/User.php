@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,6 +38,21 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Question::class, mappedBy="owner")
+     */
+    private $questions;
+
+    /**
+     * @ORM\OneToOne(targetEntity=UserProfile::class, mappedBy="owner", cascade={"persist", "remove"})
+     */
+    private $profile;
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -116,5 +133,52 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Question[]
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): self
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Question $question): self
+    {
+        if ($this->questions->removeElement($question)) {
+            // set the owning side to null (unless already changed)
+            if ($question->getUserId() === $this) {
+                $question->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getProfile(): ?UserProfile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(UserProfile $userProfile): self
+    {
+        // set the owning side of the relation if necessary
+        if ($userProfile->getOwner() !== $this) {
+            $userProfile->setOwner($this);
+        }
+
+        $this->profile = $userProfile;
+
+        return $this;
     }
 }
